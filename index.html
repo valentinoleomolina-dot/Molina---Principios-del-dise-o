@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renault - Asistencia</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<header>
+    <img src="Renault.png" alt="Renault">
+    <div>
+        <h1>INSTITUTO TÉCNICO</h1>
+        <h2>RENAULT - CÓRDOBA</h2>
+        <p>Sistema de Control de Asistencia</p>
+    </div>
+</header>
+
+<nav>
+    <a href="#registrar">Registrar Asistencia</a>
+</nav>
+
+<main>
+
+<section class="estadisticas">
+    <div>
+        <b id="presentes">0</b>
+        <span>PRESENTES HOY</span>
+    </div>
+    <div>
+        <b id="tardanzas">0</b>
+        <span>TARDANZAS</span>
+    </div>
+    <div>
+        <b id="ausentes">0</b>
+        <span>AUSENTES</span>
+    </div>
+</section>
+
+<section class="card" id="registrar">
+    <h2>Registrar asistencia</h2>
+
+    <form id="formulario">
+        <input id="nombre" placeholder="Nombre del alumno" required>
+        <input id="dni" placeholder="DNI" required>
+
+        <select id="curso">
+            <option>2° Año A</option>
+            <option>3° Año A</option>
+            <option>4° Año B</option>
+            <option>5° Año A</option>
+        </select>
+
+        <select id="turno">
+            <option>Mañana</option>
+            <option>Tarde</option>
+        </select>
+
+        <div class="estados">
+            <button type="button" data-estado="PRESENTE">PRESENTE</button>
+            <button type="button" data-estado="TARDANZA">TARDANZA</button>
+            <button type="button" data-estado="AUSENTE">AUSENTE</button>
+        </div>
+
+        <input type="hidden" id="estado" value="PRESENTE">
+
+        <button class="registrar" type="submit" id="guardar">
+            REGISTRAR
+        </button>
+
+        <button type="button" id="limpiar">LIMPIAR</button>
+    </form>
+</section>
+
+<section class="card" id="historial">
+    <h2>Historial de asistencia</h2>
+
+    <div class="filtros">
+        <input id="buscar" placeholder="Buscar alumno o DNI">
+
+        <select id="filtroCurso">
+            <option value="">Todos los cursos</option>
+            <option>2° Año A</option>
+            <option>3° Año A</option>
+            <option>4° Año B</option>
+            <option>5° Año A</option>
+        </select>
+
+        <button id="exportar">EXPORTAR CSV</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Alumno</th>
+                <th>DNI</th>
+                <th>Curso</th>
+                <th>Hora</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody id="tabla"></tbody>
+    </table>
+
+    <p id="cantidad"></p>
+    <p>Última actualización: <span id="actualizacion"></span></p>
+</section>
+
+</main>
+
+</body>
+</html>
