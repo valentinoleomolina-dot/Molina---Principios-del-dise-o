@@ -1,4 +1,10 @@
-let datos = JSON.parse(localStorage.getItem("asistencia")) || [];
+let datos = JSON.parse(localStorage.getItem("asistencia")) || [
+    ["García, Lucía", "50.107.838", "3° Año A", "07:52", "PRESENTE"],
+    ["Romero, Matías", "49.863.446", "3° Año A", "08:07", "TARDANZA"],
+    ["López, Valentina", "50.106.669", "4° Año B", "13:01", "PRESENTE"],
+    ["Fernández, Joaquín", "50.081.400", "2° Año A", "07:55", "PRESENTE"],
+    ["Martínez, Sofía", "50.327.127", "5° Año A", "13:22", "TARDANZA"]
+];
 
 let editando = -1;
 
