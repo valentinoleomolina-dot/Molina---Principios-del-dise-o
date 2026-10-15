@@ -10,7 +10,6 @@ let editando = -1;
 
 const $ = id => document.getElementById(id);
 
-
 // ===============================
 // MOSTRAR DATOS
 // ===============================
@@ -34,13 +33,11 @@ function mostrar() {
 
         let fila = document.createElement("tr");
 
-        // Alumno, DNI, Curso, Hora y Estado
         x.forEach((dato, j) => {
 
             if (j < 5) {
 
                 let celda = document.createElement("td");
-
                 celda.textContent = dato;
 
                 if (j == 4) {
@@ -51,44 +48,27 @@ function mostrar() {
             }
         });
 
-
-        // ===============================
-        // BOTONES EDITAR Y ELIMINAR
-        // ===============================
-
         let acciones = document.createElement("td");
 
         let editar = document.createElement("button");
-
         editar.textContent = "Editar";
-
         editar.onclick = () => {
             editarAlumno(datos.indexOf(x));
         };
 
-
         let borrar = document.createElement("button");
-
         borrar.textContent = "Eliminar";
         borrar.className = "eliminar";
-
         borrar.onclick = () => {
             eliminarAlumno(datos.indexOf(x));
         };
 
-
         acciones.append(editar, borrar);
-
         fila.appendChild(acciones);
-
         $("tabla").appendChild(fila);
     });
 
-
-    // ===============================
     // ESTADÍSTICAS
-    // ===============================
-
     $("presentes").textContent =
         datos.filter(x => x[4] == "PRESENTE").length;
 
@@ -98,25 +78,15 @@ function mostrar() {
     $("ausentes").textContent =
         datos.filter(x => x[4] == "AUSENTE").length;
 
-
-    // ===============================
     // INFORMACIÓN
-    // ===============================
-
     $("cantidad").textContent =
         lista.length + " registros encontrados";
 
     $("actualizacion").textContent =
         new Date().toLocaleTimeString();
 
-
-    // Guardar datos
-    localStorage.setItem(
-        "asistencia",
-        JSON.stringify(datos)
-    );
+    localStorage.setItem("asistencia", JSON.stringify(datos));
 }
-
 
 // ===============================
 // REGISTRAR / EDITAR ALUMNO
@@ -126,59 +96,42 @@ $("formulario").onsubmit = e => {
 
     e.preventDefault();
 
+    // Validar selects requeridos
+    if ($("curso").value == "" || $("turno").value == "") {
+        alert("Selecciona CURSO y TURNO.");
+        return;
+    }
+
     let alumno = [
-
         $("nombre").value,
-
         $("dni").value,
-
         $("curso").value,
-
         new Date().toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit"
         }),
-
         $("estado").value
     ];
 
-
-    // NUEVO ALUMNO
     if (editando == -1) {
-
         datos.push(alumno);
-
-    }
-
-    // EDITAR ALUMNO
-    else {
-
+    } else {
         datos[editando] = alumno;
-
         editando = -1;
-
-        $("guardar").textContent = "REGISTRAR";
+        $("guardar").textContent = "✓ REGISTRAR";
     }
 
-
-    // Limpiar formulario
     $("formulario").reset();
-
     $("estado").value = "PRESENTE";
 
-    // Volver a seleccionar PRESENTE
-    document
-        .querySelectorAll("[data-estado]")
+    document.querySelectorAll("[data-estado]")
         .forEach(b => b.classList.remove("activo"));
 
-    document
-        .querySelector('[data-estado="PRESENTE"]')
+    document.querySelector('[data-estado="PRESENTE"]')
         .classList.add("activo");
-
 
     mostrar();
 };
-
 
 // ===============================
 // EDITAR ALUMNO
@@ -189,40 +142,23 @@ function editarAlumno(i) {
     let x = datos[i];
 
     $("nombre").value = x[0];
-
     $("dni").value = x[1];
-
     $("curso").value = x[2];
-
     $("estado").value = x[4];
 
-
     editando = i;
-
     $("guardar").textContent = "GUARDAR CAMBIOS";
 
-
-    // Marcar estado actual
-    document
-        .querySelectorAll("[data-estado]")
+    document.querySelectorAll("[data-estado]")
         .forEach(b => b.classList.remove("activo"));
 
-    let botonEstado = document.querySelector(
-        '[data-estado="' + x[4] + '"]'
-    );
-
+    let botonEstado = document.querySelector('[data-estado="' + x[4] + '"]');
     if (botonEstado) {
         botonEstado.classList.add("activo");
     }
 
-
-    // Subir al formulario
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
 }
-
 
 // ===============================
 // ELIMINAR ALUMNO
@@ -231,45 +167,29 @@ function editarAlumno(i) {
 function eliminarAlumno(i) {
 
     if (confirm("¿Eliminar este registro?")) {
-
         datos.splice(i, 1);
-
         mostrar();
     }
 }
-
 
 // ===============================
 // BOTONES DE ESTADO
 // ===============================
 
-document
-    .querySelectorAll("[data-estado]")
-    .forEach(boton => {
+document.querySelectorAll("[data-estado]").forEach(boton => {
 
-        boton.onclick = () => {
+    boton.onclick = () => {
 
-            $("estado").value =
-                boton.dataset.estado;
+        $("estado").value = boton.dataset.estado;
 
+        document.querySelectorAll("[data-estado]")
+            .forEach(b => b.classList.remove("activo"));
 
-            document
-                .querySelectorAll("[data-estado]")
-                .forEach(b => {
-                    b.classList.remove("activo");
-                });
+        boton.classList.add("activo");
+    };
+});
 
-
-            boton.classList.add("activo");
-        };
-    });
-
-
-// PRESENTE seleccionado al comenzar
-document
-    .querySelector('[data-estado="PRESENTE"]')
-    .classList.add("activo");
-
+document.querySelector('[data-estado="PRESENTE"]').classList.add("activo");
 
 // ===============================
 // BOTÓN LIMPIAR
@@ -278,24 +198,16 @@ document
 $("limpiar").onclick = () => {
 
     $("formulario").reset();
-
     $("estado").value = "PRESENTE";
-
     editando = -1;
+    $("guardar").textContent = "✓ REGISTRAR";
 
-    $("guardar").textContent = "REGISTRAR";
-
-
-    document
-        .querySelectorAll("[data-estado]")
+    document.querySelectorAll("[data-estado]")
         .forEach(b => b.classList.remove("activo"));
 
-
-    document
-        .querySelector('[data-estado="PRESENTE"]')
+    document.querySelector('[data-estado="PRESENTE"]')
         .classList.add("activo");
 };
-
 
 // ===============================
 // BUSCADOR
@@ -303,13 +215,11 @@ $("limpiar").onclick = () => {
 
 $("buscar").oninput = mostrar;
 
-
 // ===============================
 // FILTRO POR CURSO
 // ===============================
 
 $("filtroCurso").onchange = mostrar;
-
 
 // ===============================
 // EXPORTAR CSV
@@ -317,44 +227,20 @@ $("filtroCurso").onchange = mostrar;
 
 $("exportar").onclick = () => {
 
-    let csv =
-        "Alumno,DNI,Curso,Hora,Estado\n";
-
+    let csv = "Alumno,DNI,Curso,Hora,Estado\n";
 
     datos.forEach(x => {
-
         csv += x.join(",") + "\n";
-
     });
 
+    let archivo = new Blob([csv], { type: "text/csv" });
 
-    let archivo = new Blob(
-        [csv],
-        { type: "text/csv" }
-    );
-
-
-    let enlace =
-        document.createElement("a");
-
-
-    enlace.href =
-        URL.createObjectURL(archivo);
-
-
-    enlace.download =
-        "asistencia.csv";
-
-
+    let enlace = document.createElement("a");
+    enlace.href = URL.createObjectURL(archivo);
+    enlace.download = "asistencia.csv";
     enlace.click();
-
 
     URL.revokeObjectURL(enlace.href);
 };
 
-
-// ===============================
-// INICIAR PÁGINA
-// ===============================
-
-mostrar();
+mostrar();   
