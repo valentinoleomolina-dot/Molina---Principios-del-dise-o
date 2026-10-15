@@ -42,23 +42,32 @@
 
 <section class="card" id="registrar">
     <h2>Registrar asistencia</h2>
+    <p class="subtitulo">Completa todos los campos requeridos</p>
 
     <form id="formulario">
-        <input id="nombre" placeholder="Nombre del alumno" required>
-        <input id="dni" placeholder="DNI" required>
+        <label class="campo-label">NOMBRE DEL ALUMNO <span class="req">*</span></label>
+        <input id="nombre" placeholder="Apellido, Nombre" required>
 
+        <label class="campo-label">N° DE DNI <span class="req">*</span></label>
+        <input id="dni" placeholder="12.345.678" required>
+
+        <label class="campo-label">CURSO <span class="req">*</span></label>
         <select id="curso">
+            <option value="">- Seleccionar -</option>
             <option>2° Año A</option>
             <option>3° Año A</option>
             <option>4° Año B</option>
             <option>5° Año A</option>
         </select>
 
+        <label class="campo-label">TURNO <span class="req">*</span></label>
         <select id="turno">
+            <option value="">- Seleccionar -</option>
             <option>Mañana</option>
             <option>Tarde</option>
         </select>
 
+        <label class="campo-label">ESTADO DE ASISTENCIA</label>
         <div class="estados">
             <button type="button" data-estado="PRESENTE">PRESENTE</button>
             <button type="button" data-estado="TARDANZA">TARDANZA</button>
@@ -67,11 +76,12 @@
 
         <input type="hidden" id="estado" value="PRESENTE">
 
-        <button class="registrar" type="submit" id="guardar">
-            REGISTRAR
-        </button>
-
-        <button type="button" id="limpiar">LIMPIAR</button>
+        <div class="botones-form">
+            <button class="registrar" type="submit" id="guardar">
+                ✓ REGISTRAR
+            </button>
+            <button type="button" id="limpiar">Limpiar</button>
+        </div>
     </form>
 </section>
 
@@ -114,4 +124,4 @@
 </main>
 
 </body>
-</html>
+</html>   
