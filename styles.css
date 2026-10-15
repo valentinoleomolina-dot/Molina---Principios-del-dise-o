@@ -13,7 +13,7 @@ body {
 /* ---------- ENCABEZADO ---------- */
 
 header {
-    height: 85px;
+    height: 95px;
     background: #181818;
     color: white;
     display: flex;
@@ -24,32 +24,32 @@ header {
 }
 
 header img {
-    width: 75px;
-    height: 75px;
+    width: 85px;
+    height: 85px;
     object-fit: contain;
 }
 
 header h1 {
-    font-size: 12px;
+    font-size: 16px;
     letter-spacing: 3px;
     color: #f4c400;
     margin-bottom: 3px;
 }
 
 header h2 {
-    font-size: 18px;
+    font-size: 26px;
     margin-bottom: 3px;
 }
 
 header p {
-    font-size: 11px;
+    font-size: 15px;
     color: #aaa;
 }
 
 /* ---------- NAV ---------- */
 
 nav {
-    height: 32px;
+    height: 40px;
     background: #12346b;
     padding-left: 14px;
     display: flex;
@@ -59,8 +59,8 @@ nav {
 nav a {
     color: #fff;
     text-decoration: none;
-    font-size: 11px;
-    padding: 9px 15px;
+    font-size: 15px;
+    padding: 12px 18px;
 }
 
 nav a:first-child {
@@ -87,12 +87,12 @@ main {
 .estadisticas div {
     background: #fff;
     flex: 1;
-    height: 56px;
-    padding: 8px 18px;
+    height: 68px;
+    padding: 10px 20px;
     border-left: 3px solid #00b34b;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     box-shadow: 0 1px 3px #ccc;
 }
 
@@ -105,7 +105,7 @@ main {
 }
 
 .estadisticas b {
-    font-size: 26px;
+    font-size: 38px;
     color: #00a83b;
 }
 
@@ -118,7 +118,7 @@ main {
 }
 
 .estadisticas span {
-    font-size: 10px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -126,7 +126,7 @@ main {
 
 main {
     display: grid;
-    grid-template-columns: 305px 1fr;
+    grid-template-columns: 320px 1fr;
     gap: 18px;
 }
 
@@ -155,8 +155,8 @@ main {
 .card > h2 {
     background: #12346b;
     color: white;
-    font-size: 13px;
-    padding: 15px 18px;
+    font-size: 17px;
+    padding: 16px 18px;
     text-transform: uppercase;
 }
 
@@ -164,21 +164,32 @@ main {
     background: #181818;
 }
 
-.card > h2::after {
-    content: "";
-    display: block;
-    font-size: 9px;
-    font-weight: normal;
-    color: #aaa;
-}
+/* ---------- FORMULARIO (SIN CAMBIOS) ---------- */
 
-/* ---------- FORMULARIO ---------- */
+#registrar .subtitulo {
+    font-size: 11px;
+    color: #777;
+    padding: 10px 18px 0;
+}
 
 #formulario {
     padding: 18px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#formulario .campo-label {
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #333;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+#formulario .campo-label .req {
+    color: #e00020;
 }
 
 #formulario input,
@@ -189,25 +200,13 @@ main {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 0;
-    font-size: 11px;
-    background: #fff;
-}
-
-#nombre,
-#dni {
-    width: 100%;
-}
-
-#curso,
-#turno {
-    width: calc(50% - 6px) !important;
+    font-size: 12px;
+    background: #f7f7f7;
 }
 
 #formulario input::placeholder {
     color: #aaa;
 }
-
-/* ---------- ESTADOS ---------- */
 
 .estados {
     width: 100%;
@@ -224,30 +223,54 @@ main {
     font-size: 10px;
     font-weight: bold;
     cursor: pointer;
+    color: #333;
 }
 
-.estados button.activo {
+.estados button[data-estado="PRESENTE"].activo {
     background: #00b341;
     color: white;
     border-color: #00b341;
 }
 
+.estados button[data-estado="TARDANZA"].activo {
+    background: #f0a000;
+    color: white;
+    border-color: #f0a000;
+}
+
+.estados button[data-estado="AUSENTE"].activo {
+    background: #e00020;
+    color: white;
+    border-color: #e00020;
+}
+
+.botones-form {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
 #guardar {
     flex: 1;
-    height: 36px;
+    height: 38px;
     background: #ffca05;
     color: #111;
     border: none;
     border-radius: 0;
-    font-size: 11px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 #limpiar {
-    height: 36px;
+    height: 38px;
+    padding: 0 18px;
     background: white;
     border: 1px solid #ccc;
     border-radius: 0;
-    font-size: 10px;
+    font-size: 11px;
+    cursor: pointer;
 }
 
 /* ---------- FILTROS ---------- */
@@ -255,29 +278,31 @@ main {
 .filtros {
     display: flex;
     gap: 8px;
-    padding: 10px 18px;
+    padding: 12px 18px;
     margin: 0;
 }
 
 .filtros input {
     flex: 1;
-    height: 30px;
-    padding: 7px;
+    height: 38px;
+    padding: 8px;
     border: 1px solid #ccc;
-    font-size: 11px;
+    font-size: 15px;
 }
 
 .filtros select {
-    width: 140px;
-    height: 30px;
+    width: 160px;
+    height: 38px;
     border: 1px solid #ccc;
-    font-size: 11px;
+    font-size: 15px;
 }
 
 #exportar {
     background: white;
     border: 1px solid #ccc;
-    font-size: 10px;
+    font-size: 14px;
+    padding: 0 14px;
+    height: 38px;
 }
 
 /* ---------- TABLA ---------- */
@@ -285,22 +310,22 @@ main {
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 10px;
+    font-size: 15px;
 }
 
 th {
     background: #f1f1f1;
     color: #173b70;
-    font-size: 9px;
+    font-size: 13px;
     text-transform: uppercase;
-    padding: 10px;
+    padding: 14px;
     text-align: left;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
 }
 
 td {
-    padding: 10px;
+    padding: 14px;
     border-bottom: 1px solid #ddd;
 }
 
@@ -314,7 +339,7 @@ tr:hover {
 .tardanza,
 .ausente {
     font-weight: bold;
-    font-size: 9px;
+    font-size: 13px;
 }
 
 .presente {
@@ -335,11 +360,11 @@ tr:hover {
 /* ---------- BOTONES DE ACCIONES ---------- */
 
 td button {
-    padding: 5px 8px;
+    padding: 7px 12px;
     margin: 2px;
     border: 1px solid #ccc;
     background: white;
-    font-size: 9px;
+    font-size: 13px;
     cursor: pointer;
 }
 
@@ -354,14 +379,14 @@ td .eliminar {
 /* ---------- INFORMACIÓN INFERIOR ---------- */
 
 #cantidad {
-    padding: 10px 18px 0;
-    font-size: 10px;
+    padding: 12px 18px 0;
+    font-size: 14px;
     color: #777;
 }
 
 #historial > p:last-child {
-    padding: 8px 18px;
-    font-size: 9px;
+    padding: 10px 18px;
+    font-size: 13px;
     color: #999;
     border-top: 1px solid #ddd;
 }
@@ -403,12 +428,7 @@ td .eliminar {
     }
 
     header h2 {
-        font-size: 14px;
-    }
-
-    #curso,
-    #turno {
-        width: 100% !important;
+        font-size: 18px;
     }
 
     .filtros {
@@ -419,4 +439,4 @@ td .eliminar {
     #exportar {
         width: 100%;
     }
-}
+}   
